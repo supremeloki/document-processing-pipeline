@@ -5,3 +5,31 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Protocol, Sequence
 
+
+class DocPipelineError(Exception):
+    pass
+
+
+class UnsupportedFormatError(DocPipelineError):
+    def __init__(self, suffix: str) -> None:
+        super().__init__(f"unsupported document format: {suffix!r}")
+
+
+class SourceMissingError(DocPipelineError):
+    pass
+
+
+TOKEN_PATTERN: re.Pattern[str] = re.compile(r"\w+", re.UNICODE)
+WHITESPACE_PATTERN: re.Pattern[str] = re.compile(r"[ \t]+")
+BLANK_LINE_PATTERN: re.Pattern[str] = re.compile(r"\n{3,}")
+MARKDOWN_NOISE: re.Pattern[str] = re.compile(
+    r"(!\[[^\]]*\]\([^)]*\)|\[\^?\d+\]|`{1,3}[^`]*`|\*\*|\*|__)"
+)
+HTML_TAG_PATTERN: re.Pattern[str] = re.compile(r"<[^>]+>")
+
+
+@dataclass(frozen=True)
+class ProcessedDocument:
+    doc_id: str
+    source_name: str
+    clean_text: str
