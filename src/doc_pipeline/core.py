@@ -33,3 +33,4 @@ class ProcessedDocument:
     doc_id: str
     source_name: str
     clean_text: str
+    chunks: tuple[str, ...]
