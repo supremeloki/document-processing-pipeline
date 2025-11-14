@@ -36,3 +36,5 @@ class ProcessedDocument:
     chunks: tuple[str, ...]
     token_count: int
     metadata: dict[str, Any] = field(default_factory=dict)
+
+    @property
