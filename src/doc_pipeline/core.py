@@ -34,3 +34,5 @@ class ProcessedDocument:
     source_name: str
     clean_text: str
     chunks: tuple[str, ...]
+    token_count: int
+    metadata: dict[str, Any] = field(default_factory=dict)
