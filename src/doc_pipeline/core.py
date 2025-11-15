@@ -38,3 +38,5 @@ class ProcessedDocument:
     metadata: dict[str, Any] = field(default_factory=dict)
 
     @property
+    def chunk_count(self) -> int:
+        return len(self.chunks)
