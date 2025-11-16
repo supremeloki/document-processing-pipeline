@@ -40,3 +40,5 @@ class ProcessedDocument:
     @property
     def chunk_count(self) -> int:
         return len(self.chunks)
+
+
