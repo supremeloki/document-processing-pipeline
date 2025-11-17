@@ -42,3 +42,4 @@ class ProcessedDocument:
         return len(self.chunks)
 
 
+@dataclass(frozen=True)
