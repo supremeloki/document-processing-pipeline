@@ -43,3 +43,5 @@ class ProcessedDocument:
 
 
 @dataclass(frozen=True)
+class PipelineStats:
+    documents: int
