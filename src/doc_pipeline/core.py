@@ -45,3 +45,5 @@ class ProcessedDocument:
 @dataclass(frozen=True)
 class PipelineStats:
     documents: int
+    total_chunks: int
+    total_tokens: int
