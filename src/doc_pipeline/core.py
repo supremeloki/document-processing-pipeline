@@ -51,3 +51,5 @@ class PipelineStats:
 
 def extract_text(path: Path) -> str:
     if not path.exists():
+        raise SourceMissingError(f"document not found: {path}")
+    suffix = path.suffix.lower()
