@@ -49,3 +49,5 @@ class PipelineStats:
     total_tokens: int
 
 
+def extract_text(path: Path) -> str:
+    if not path.exists():
