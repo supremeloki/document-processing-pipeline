@@ -56,3 +56,5 @@ def extract_text(path: Path) -> str:
     if suffix in {".txt", ".md"}:
         return path.read_text(encoding="utf-8")
     if suffix == ".json":
+        payload = json_loads(path.read_text(encoding="utf-8"))
+        return flatten_json_text(payload)
