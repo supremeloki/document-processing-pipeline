@@ -54,3 +54,5 @@ def extract_text(path: Path) -> str:
         raise SourceMissingError(f"document not found: {path}")
     suffix = path.suffix.lower()
     if suffix in {".txt", ".md"}:
+        return path.read_text(encoding="utf-8")
+    if suffix == ".json":
