@@ -60,3 +60,5 @@ def extract_text(path: Path) -> str:
         return flatten_json_text(payload)
     raise UnsupportedFormatError(suffix)
 
+
+def json_loads(raw: str) -> Any:
