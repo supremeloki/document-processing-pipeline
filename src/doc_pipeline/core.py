@@ -63,3 +63,5 @@ def extract_text(path: Path) -> str:
 
 def json_loads(raw: str) -> Any:
     import json
+
+    return json.loads(raw)
