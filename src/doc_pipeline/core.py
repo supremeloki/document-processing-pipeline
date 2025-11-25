@@ -71,3 +71,5 @@ def flatten_json_text(payload: Any, depth: int = 0) -> str:
     if depth > 6:
         return ""
     if isinstance(payload, dict):
+        parts = [f"{k}: {flatten_json_text(v, depth + 1)}" for k, v in payload.items()]
+        return " ".join(p for p in parts if p)
