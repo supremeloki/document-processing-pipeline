@@ -69,3 +69,5 @@ def json_loads(raw: str) -> Any:
 
 def flatten_json_text(payload: Any, depth: int = 0) -> str:
     if depth > 6:
+        return ""
+    if isinstance(payload, dict):
