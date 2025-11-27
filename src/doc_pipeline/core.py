@@ -80,3 +80,5 @@ def flatten_json_text(payload: Any, depth: int = 0) -> str:
     return str(payload)
 
 
+def strip_markdown(text: str) -> str:
+    without_noise = MARKDOWN_NOISE.sub(" ", text)
