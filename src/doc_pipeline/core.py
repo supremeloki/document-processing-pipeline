@@ -78,3 +78,5 @@ def flatten_json_text(payload: Any, depth: int = 0) -> str:
     if isinstance(payload, bool):
         return ""
     return str(payload)
+
+
