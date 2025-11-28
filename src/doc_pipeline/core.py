@@ -85,3 +85,5 @@ def strip_markdown(text: str) -> str:
     without_headers = re.sub(r"^#{1,6}\s+", "", without_noise, flags=re.MULTILINE)
     without_links = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", without_headers)
     return without_links
+
+
