@@ -82,3 +82,4 @@ def flatten_json_text(payload: Any, depth: int = 0) -> str:
 
 def strip_markdown(text: str) -> str:
     without_noise = MARKDOWN_NOISE.sub(" ", text)
+    without_headers = re.sub(r"^#{1,6}\s+", "", without_noise, flags=re.MULTILINE)
