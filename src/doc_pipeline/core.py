@@ -87,3 +87,5 @@ def strip_markdown(text: str) -> str:
     return without_links
 
 
+def normalize_whitespace(text: str) -> str:
+    single_spaced = WHITESPACE_PATTERN.sub(" ", text)
