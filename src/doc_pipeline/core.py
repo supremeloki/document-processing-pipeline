@@ -89,3 +89,5 @@ def strip_markdown(text: str) -> str:
 
 def normalize_whitespace(text: str) -> str:
     single_spaced = WHITESPACE_PATTERN.sub(" ", text)
+    collapsed_blank = BLANK_LINE_PATTERN.sub("\n\n", single_spaced)
+    return collapsed_blank.strip()
