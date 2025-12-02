@@ -93,3 +93,4 @@ def normalize_whitespace(text: str) -> str:
     return collapsed_blank.strip()
 
 
+def split_chunks(text: str, max_words: int = 150, overlap: int = 20) -> list[str]:
