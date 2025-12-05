@@ -61,3 +61,4 @@ def test_html_tags_removed_when_enabled():
 def test_whitespace_normalized():
     cleaner = Cleaner(remove_markdown=False)
     result = cleaner("too   many\tspaces\n\n\n\nhere")
+    assert "too many spaces" in result
