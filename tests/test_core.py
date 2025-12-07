@@ -62,3 +62,4 @@ def test_whitespace_normalized():
     cleaner = Cleaner(remove_markdown=False)
     result = cleaner("too   many\tspaces\n\n\n\nhere")
     assert "too many spaces" in result
+    assert "\n\n\n" not in result
