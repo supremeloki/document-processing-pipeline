@@ -64,3 +64,4 @@ def test_whitespace_normalized():
     assert "too many spaces" in result
     assert "\n\n\n" not in result
 
+
