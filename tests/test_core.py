@@ -65,3 +65,4 @@ def test_whitespace_normalized():
     assert "\n\n\n" not in result
 
 
+def test_chunking_with_overlap():
