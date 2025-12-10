@@ -68,3 +68,4 @@ def test_whitespace_normalized():
 def test_chunking_with_overlap():
     words = [f"w{i}" for i in range(100)]
     chunks = split_chunks(" ".join(words), max_words=30, overlap=5)
+    assert len(chunks) >= 3
