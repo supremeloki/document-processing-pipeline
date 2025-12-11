@@ -69,3 +69,5 @@ def test_chunking_with_overlap():
     words = [f"w{i}" for i in range(100)]
     chunks = split_chunks(" ".join(words), max_words=30, overlap=5)
     assert len(chunks) >= 3
+    first_tail = chunks[0].split()[-5:]
+    second_head = chunks[1].split()[:5]
