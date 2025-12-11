@@ -72,3 +72,4 @@ def test_chunking_with_overlap():
     first_tail = chunks[0].split()[-5:]
     second_head = chunks[1].split()[:5]
     assert first_tail == second_head
+
