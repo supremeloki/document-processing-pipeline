@@ -74,3 +74,4 @@ def test_chunking_with_overlap():
     assert first_tail == second_head
 
 
+def test_invalid_overlap_rejected():
