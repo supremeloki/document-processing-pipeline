@@ -78,3 +78,4 @@ def test_invalid_overlap_rejected():
     with pytest.raises(Exception):
         split_chunks("text", max_words=10, overlap=10)
 
+
