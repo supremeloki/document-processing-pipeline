@@ -79,3 +79,4 @@ def test_invalid_overlap_rejected():
         split_chunks("text", max_words=10, overlap=10)
 
 
+def test_full_pipeline_process_text():
