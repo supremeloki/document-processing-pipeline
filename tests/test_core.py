@@ -80,3 +80,4 @@ def test_invalid_overlap_rejected():
 
 
 def test_full_pipeline_process_text():
+    pipeline = DocumentPipeline(chunk_size=20, chunk_overlap=3)
