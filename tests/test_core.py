@@ -84,3 +84,4 @@ def test_full_pipeline_process_text():
     document = pipeline.process_text(
         "Sample document text. " * 5, doc_id="sample"
     )
+    assert document.chunk_count >= 1
