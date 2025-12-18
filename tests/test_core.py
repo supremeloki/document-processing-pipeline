@@ -86,3 +86,4 @@ def test_full_pipeline_process_text():
     )
     assert document.chunk_count >= 1
     assert document.token_count == 15
+    assert document.metadata["source"] == "<memory>"
