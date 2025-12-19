@@ -89,3 +89,4 @@ def test_full_pipeline_process_text():
     assert document.metadata["source"] == "<memory>"
 
 
+def test_enrichers_add_metadata():
