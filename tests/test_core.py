@@ -91,3 +91,4 @@ def test_full_pipeline_process_text():
 
 def test_enrichers_add_metadata():
     def add_checksum(meta):
+        return {"checksum": len(str(meta))}
