@@ -92,3 +92,5 @@ def test_full_pipeline_process_text():
 def test_enrichers_add_metadata():
     def add_checksum(meta):
         return {"checksum": len(str(meta))}
+    pipeline = DocumentPipeline(enrichers=[add_checksum])
+    document = pipeline.process_text("content", doc_id="e")
