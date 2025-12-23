@@ -96,3 +96,4 @@ def test_enrichers_add_metadata():
     document = pipeline.process_text("content", doc_id="e")
     assert "checksum" in document.metadata
 
+
