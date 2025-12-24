@@ -97,3 +97,4 @@ def test_enrichers_add_metadata():
     assert "checksum" in document.metadata
 
 
+def test_process_directory(tmp_path):
