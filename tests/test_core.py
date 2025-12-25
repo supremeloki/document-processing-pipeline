@@ -99,3 +99,4 @@ def test_enrichers_add_metadata():
 
 def test_process_directory(tmp_path):
     (tmp_path / "one.md").write_text("first doc", encoding="utf-8")
+    (tmp_path / "two.txt").write_text("second doc", encoding="utf-8")
