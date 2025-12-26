@@ -103,3 +103,5 @@ def test_process_directory(tmp_path):
     (tmp_path / "skip.bin").write_bytes(b"\x00")
     pipeline = DocumentPipeline()
     processed = pipeline.process_directory(tmp_path)
+    names = {d.source_name for d in processed}
+    assert names == {"one.md", "two.txt"}
