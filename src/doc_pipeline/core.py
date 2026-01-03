@@ -100,3 +100,78 @@ def split_chunks(text: str, max_words: int = 150, overlap: int = 20) -> list[str
     if not words:
         return []
     step = max_words - overlap
+    chunks: list[str] = []
+    for index in range(0, len(words), step):
+        window = words[index:index + max_words]
+        if len(window) < overlap and chunks:
+            break
+        chunks.append(" ".join(window))
+    return chunks
+
+
+class Cleaner:
+    def __init__(self, remove_markdown: bool = True,
+                 remove_html: bool = False) -> None:
+        self._markdown = remove_markdown
+        self._html = remove_html
+
+    def __call__(self, text: str) -> str:
+        result = text
+        if self._html:
+            result = HTML_TAG_PATTERN.sub(" ", result)
+        if self._markdown:
+            result = strip_markdown(result)
+        return normalize_whitespace(result)
+
+
+class DocumentPipeline:
+    def __init__(self, cleaner: Cleaner | None = None,
+                 chunk_size: int = 150, chunk_overlap: int = 20,
+                 enrichers: Sequence[Callable[[dict[str, Any]], dict[str, Any]]] = ()) -> None:
+        self._cleaner = cleaner or Cleaner()
+        self._chunk_size = chunk_size
+        self._overlap = chunk_overlap
+        self._enrichers = list(enrichers)
+
+    def process_file(self, path: Path, doc_id: str | None = None) -> ProcessedDocument:
+        raw = extract_text(path)
+        return self.process_text(raw, doc_id=doc_id or path.stem,
+                                 source_name=path.name)
+
+    def process_text(self, text: str, doc_id: str,
+                     source_name: str = "<memory>") -> ProcessedDocument:
+        cleaned = self._cleaner(text)
+        chunks = tuple(split_chunks(cleaned, self._chunk_size, self._overlap))
+        metadata: dict[str, Any] = {
+            "source": source_name,
+            "characters": len(cleaned),
+        }
+        for enricher in self._enrichers:
+            extra = enricher(metadata)
+            if isinstance(extra, dict):
+                metadata.update(extra)
+        return ProcessedDocument(
+            doc_id=doc_id,
+            source_name=source_name,
+            clean_text=cleaned,
+            chunks=chunks,
+            token_count=len(TOKEN_PATTERN.findall(cleaned)),
+            metadata=metadata,
+        )
+
+    def process_directory(self, directory: Path,
+                          allowed_suffixes: set[str] | None = None) -> list[ProcessedDocument]:
+        suffixes = allowed_suffixes or {".txt", ".md"}
+        processed: list[ProcessedDocument] = []
+        for path in sorted(directory.iterdir()):
+            if path.is_file() and path.suffix.lower() in suffixes:
+                processed.append(self.process_file(path))
+        return processed
+
+    @staticmethod
+    def summarize(documents: Sequence[ProcessedDocument]) -> PipelineStats:
+        return PipelineStats(
+            documents=len(documents),
+            total_chunks=sum(d.chunk_count for d in documents),
+            total_tokens=sum(d.token_count for d in documents),
+        )
